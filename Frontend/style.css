@@ -1,0 +1,492 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    /* background-image: url(./images/_7a9c5845-b27c-4a18-bc28-8ba98ba42609_processed\ \(1\).jpg); */
+    /* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: linear-gradient(45deg, #735fd8, #482481);
+    ;
+    position: relative;
+    z-index: 1;
+}
+
+header .bgimg {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: -1;
+}
+
+header nav {
+    max-width: 95%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+header .checkboxbtn {
+    font-size: 30px;
+    color: white;
+    margin: auto;
+    float: right;
+    cursor: pointer;
+    display: none;
+    position: relative;
+    z-index: 10;
+}
+
+#check {
+    display: none;
+}
+
+
+
+
+header nav .logo {
+    margin-top: 20px;
+}
+
+header nav .button {
+    margin-top: 15px;
+    background: none;
+}
+
+header nav .button button {
+    background: none;
+    color: white;
+    border: 2px solid #9400FF;
+    background-color: #9400FF;
+    padding: 5px 20px;
+    border-radius: 35px;
+    margin-bottom: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+}
+
+header .box {
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+    color: white;
+    margin-top: 100px;
+
+}
+
+header .box .box1 {
+    max-width: 600px;
+
+}
+
+header .box .box1 p {
+    color: #FFF;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+header .box .box1 h1 {
+    color: #FFF;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    width: 500px;
+    margin-bottom: 70px;
+}
+
+header .box .box1 button {
+    background: none;
+    color: white;
+    border: 2px solid #9400FF;
+    background-color: #9400FF;
+    padding: 10px 30px;
+    border-radius: 35px;
+    margin-bottom: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+}
+
+header .box .box2 .eij {
+    max-width: 80%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 30px;
+}
+
+header .box .box2 {
+    height: auto;
+    margin: auto;
+    color: white;
+    margin-top: 100px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+header .box .box2 .box2_1 {
+    float: left;
+}
+
+header .box .box2 .box2_1 h5 {
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+header .box .box2 .eij .box2_1 p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+header .box .box2 {
+    padding-bottom: 100px;
+}
+
+
+
+
+
+
+section {
+    max-width: 100%;
+    height: auto;
+    background-color: black;
+
+}
+
+section .section1 {
+    max-width: 80%;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: auto;
+    justify-content: space-around;
+    padding-top: 70px;
+}
+
+section .section1 .section2 {
+    color: white;
+    margin: auto;
+
+
+}
+.k{
+    width: 280px;
+}
+section .section1 .section2 .p {
+    color: #FFF;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+section .section1 .section2 p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+}
+
+/* section .section1 .section2 button {
+    background: none;
+    color: white;
+    border: 2px solid #9400FF;
+    background-color: #9400FF;
+    padding: 10px 30px;
+    border-radius: 35px;
+    margin-top: 60px;
+
+} */
+
+main {
+    max-width: 100%;
+    height: auto;
+    background-color: black;
+
+}
+
+main .main1 {
+    max-width: 80%;
+    height: auto;
+    padding-top: 100px;
+    margin: auto;
+}
+
+main p {
+    color: #FFF;
+    text-align: center;
+    font-size: 29px;
+    font-weight: 400;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+.orta {
+    max-width: 100%;
+    height: auto;
+    background-color: black;
+}
+
+.orta .orta1 {
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+    color: white;
+}
+
+.orta .orta1 p {
+    padding-top: 70px;
+    margin-bottom: 30px;
+    color: #FFF;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 29px;
+    font-weight: 400;
+}
+
+.keyin {
+    max-width: 100%;
+    height: auto;
+    background-color: black;
+    padding-top: 100px;
+}
+
+.keyin .keyin1 {
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    justify-content: space-between;
+}
+
+.keyin .keyin1 .p {
+    color: #999;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.keyin .keyin1 .keyin3 p {
+    margin-top: 15px;
+}
+
+
+.bolt {
+    max-width: 100%;
+    height: auto;
+    background-color: black;
+}
+
+.bolt .bolt1 {
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    color: white;
+    justify-content: space-between;
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+}
+
+.bolt .bolt1 .bolt2 img{
+    border-radius: 50%;
+    width: 500px;
+}
+
+.bolt .bolt3 {
+    margin: auto;
+    max-width: 500px;
+    height: auto;
+}
+
+.bolt .bolt1 .bolt3 .p {
+    color: #FFF;
+
+    font-size: 29px;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.bolt .bolt1 .bolt3 p {
+    color: #EBEBEB;
+
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+.kill{
+    margin-bottom: 30px !important;
+}
+.bolt .bolt1 .bolt3 button {
+    background: none;
+    color: white;
+    border: 2px solid #9400FF;
+    background-color: #9400FF;
+    padding: 10px 30px;
+    border-radius: 35px;
+}
+
+
+.besh {
+    max-width: 100%;
+    height: auto;
+    background-image: url(./images/Frame\ \(3\).svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.besh .bir2 {
+    text-align: center;
+}
+
+.besh .bir2 h1 {
+    padding-top: 70px;
+    margin-bottom: 30px;
+    color: #FFF;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 51px;
+    font-weight: 400;
+}
+
+.besh .bir2 p {
+    color: rgba(255, 255, 255, 0.70);
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.besh .bir2 button {
+    background: none;
+    color: white;
+    border: 2px solid #9400FF;
+    background-color: #9400FF;
+    padding: 10px 30px;
+    border-radius: 35px;
+    margin-bottom: 70px;
+}
+
+
+
+footer {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+footer span {
+    color: #9400FF;
+}
+
+footer img {
+    padding-top: 100px;
+    margin-bottom: 40px;
+}
+
+footer p {
+    padding-bottom: 40px;
+}
+
+footer .p {
+    padding-bottom: 50px;
+}
+
+@media (max-width:710px) {
+    header .checkboxbtn {
+        display: block;
+        float: right;
+        margin-top: 15px;
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+
+    header nav .ul ul {
+        position: fixed;
+        width: 200px;
+        height: 300px;
+        right: -100%;
+        text-align: center;
+        background: #e4c932;
+        transition: 0.5s;
+    }
+
+    header #check:checked~nav .ul ul {
+        right: 0;
+        z-index: 5;
+    }
+
+    header nav .ul ul li {
+        display: block;
+    }
+
+    header .box .box2 .eij {
+        max-width: 100%;
+    }
+
+    header .box .box1 h1 {
+        font-size: 38px;
+    }
+
+
+    .keyin .keyin1 {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    section .section1 {
+        grid-template-columns: auto;
+    }
+
+    main p {
+        font-size: 19px;
+    }
+
+    .orta .orta1 p {
+        font-size: 19px;
+    }
+
+    .keyin .keyin1 {
+        grid-template-columns: auto auto;
+    }
+
+    .bolt .bolt1 {
+        grid-template-columns: auto;
+    }
+
+    .besh .bir2 h1 {
+        font-size: 31px;
+    }
+
+    .besh .bir2 p {
+        font-size: 13px;
+    }
+}
