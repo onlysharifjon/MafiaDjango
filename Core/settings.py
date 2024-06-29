@@ -49,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'Core.urls'
@@ -67,6 +69,40 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+APPEND_SLASH = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://www.marsgame.uz",
+    "https://marsgame.uz",
+    "http://127.0.0.1:5500",
+    "http://127.0.0.1::3000",
+    "http://localhost:3000",
+    "http://localhost:5500",
+
+]
+CORS_ALLOW_HEADERS = [
+    "cache-control",
+    'content-type'
+]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = [
+    'https://marsgame.uz',
+    'https://www.marsgame.uz',
+    'http://localhost:3000',
+    'http://localhost:5500',
 ]
 
 WSGI_APPLICATION = 'Core.wsgi.application'
@@ -115,6 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -5,33 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./signup.css">
 </head>
 
 <body>
-    <!--ring div starts here-->
-    <div class="ring">
-        <i style="--clr:#ffffff;"></i>
-        <i style="--clr:#5f1d92;"></i>
-        <i style="--clr:#1b0e7c;"></i>
-        <div class="login">
-            <h2>Kirish</h2>
-            <div class="inputBx">
-                <input type="text" placeholder="Email">
-                <div class="btn-send">
-                    <button>Yuborish</button>
-                </div>
-            </div>
-            <div class="inputBx">
-                <input type="" placeholder="Tasdiqlash kodi" maxlength="6">
-                
-            </div>
-            <div class="inputBx">
-                <input type="submit" value="Kirish">
+<div class="ring">
+    <i style="--clr:#ffffff;"></i>
+    <i style="--clr:#5f1d92;"></i>
+    <i style="--clr:#1b0e7c;"></i>
+    <div class="signup">
+        <h2>Kirish</h2>
+        <div class="inputBx">
+            <input id="email" type="email" placeholder="Email">
+            <div id="btn-send" class="btn-send">
+                <button>Yuborish</button>
             </div>
         </div>
+        <div class="inputBx">
+            <input type="text" placeholder="Tasdiqlash kodi" maxlength="6">
+        </div>
+        <div class="inputBx">
+            <input type="submit" value="Kirish">
+        </div>
     </div>
-    <!--ring div ends here-->
+</div>
+<script src="./signup.js"></script>
 </body>
-
 </html>

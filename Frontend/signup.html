@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./signup.css">
 </head>
@@ -16,22 +16,24 @@
         <div class="signup">
             <h2>Ro'yxatdan o'tish</h2>
             <div class="inputBx">
-                <input type="text" placeholder="Email">
-                <div class="btn-send">
+                <input id="email" type="email" placeholder="Email">
+                <div id="btn-send" class="btn-send">
                     <button>Yuborish</button>
                 </div>
             </div>
             <div class="inputBx">
-                <input type="" placeholder="Foydalanuvchi nomi" maxlength="32">
+                <input type="text" placeholder="Foydalanuvchi nomi" maxlength="32">
             </div>
             <div class="inputBx">
-                <input type="" placeholder="Tasdiqlash kodi" maxlength="6">
+                <input type="text" placeholder="Tasdiqlash kodi" maxlength="6">
             </div>
             <div class="inputBx">
                 <input type="submit" value="Ro'yxatdan o'tish">
             </div>
         </div>
     </div>
+
+    <script src="./signup.js"></script>
 </body>
 
 </html>
