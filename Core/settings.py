@@ -81,8 +81,17 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1::3000",
     "http://localhost:3000",
     "http://localhost:5500",
-
 ]
+
+EMAIL_HOST_NAME = "MafiUser"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "mominovsharif12@gmail.com"
+EMAIL_HOST_PASSWORD = "uorvtkmaxoxpjpcr"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+
 CORS_ALLOW_HEADERS = [
     "cache-control",
     'content-type'
