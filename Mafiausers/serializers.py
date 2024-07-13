@@ -20,3 +20,8 @@ class RegisterSRL(ModelSerializer):
     class Meta:
         model = MafiaUserModel
         fields = ['email', 'username']
+
+class VerifySerializer(ModelSerializer):
+    class Meta:
+        model = MafiaUserModel
+        fields = ['otp',]

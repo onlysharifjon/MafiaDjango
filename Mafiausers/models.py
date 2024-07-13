@@ -15,7 +15,6 @@ from django.db import models
 class MafiaUserModel(models.Model):
     username = models.CharField(max_length=32, unique=True, default="")
     email = models.EmailField(unique=True)
-    # password = models.CharField(max_length=16,default="")
     otp = models.CharField(max_length=4, default="")
     status = models.BooleanField(default=False)
 
