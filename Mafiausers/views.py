@@ -9,48 +9,12 @@ import random
 from .models import MafiaUserModel
 from .models import MafiaUserModel
 from .serializers import *
+from drf_yasg.utils import swagger_auto_schema
 
 # login qilish uchun api yozishimiz kerak
 from rest_framework.views import APIView
 
 
-class Login_API(APIView):
-    serializer_class = LoginSerializer
-
-    def post(self, request):
-        email = request.data.get('email')
-
-        try:
-            filter = MafiaUserModel.objects.filter(email=email)
-            if filter.exists():
-                sender_email = "mominovsharif12@gmail.com"
-                receiver_email = email
-                password = "uorv tkma xoxp jpcr"
-                smtp_server = "smtp.gmail.com"
-                smtp_port = 587
-                server = smtplib.SMTP(smtp_server, smtp_port)
-                server.starttls()
-                server.login(sender_email, password)
-                parol = random.randint(100000, 999999)
-
-                subject = "Mafia UZ"
-                body = f"Sizning tasdiqlash kodingiz{parol}"
-                message = MIMEMultipart()
-
-                message["From"] = sender_email
-                message["To"] = receiver_email
-                message["Subject"] = subject
-                message.attach(MIMEText(body, "plain"))
-
-                server.sendmail(sender_email, receiver_email, message.as_string())
-                print('Email sent successfully!')
-            else:
-                return Response({'error': 'Bunday email mavjud emas'}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            print(f'Error: {e}')
-        # finally:
-        #     server.quit()
-        return Response({'email': 'Sizning emailingizga xabar jo`natildi'})
 
 
 # from rest_framework.generics import ListCreateAPIView, GenericAPIView
@@ -66,6 +30,7 @@ from .serializers import RegisterSRL
 class RegisterMafiaUser(APIView):
     serializer_class = RegisterSRL
 
+    @swagger_auto_schema(request_body=RegisterSRL)
     def post(self, request):
         email = request.data.get('email')
         username = request.data.get('username')
@@ -114,6 +79,7 @@ class RegisterMafiaUser(APIView):
             return Response({'error': "Bunday email allaqachon ro`yxatdan o`tgan"})
 
 class VerifyAccount(APIView):
+    @swagger_auto_schema(request_body=VerifySerializer)
     def post(self,request):
         otp = request.data.get('otp')
         b = MafiaUserModel.objects.all().filter(otp=otp).update(status=True)
@@ -122,4 +88,56 @@ class VerifyAccount(APIView):
             return Response({'message':'Register Sucsessfuly'})
         else:
             return Response({'message':'Password is invalid'})
+
+
+class Login_API(APIView):
+    serializer_class = LoginSerializer
+    @swagger_auto_schema(request_body=LoginSerializer)
+    def post(self, request):
+        email = request.data.get('email')
+
+        try:
+            filter = MafiaUserModel.objects.filter(email=email)
+            if filter.exists():
+                sender_email = "mominovsharif12@gmail.com"
+                receiver_email = email
+                password = "uorv tkma xoxp jpcr"
+                smtp_server = "smtp.gmail.com"
+                smtp_port = 587
+                server = smtplib.SMTP(smtp_server, smtp_port)
+                server.starttls()
+                server.login(sender_email, password)
+                parol = random.randint(100000, 999999)
+                MafiaUserModel.objects.filter(email=email).update(otp_login=parol)
+                subject = "Mafia UZ"
+                body = f"Sizning tasdiqlash kodingiz{parol}"
+                message = MIMEMultipart()
+
+                message["From"] = sender_email
+                message["To"] = receiver_email
+                message["Subject"] = subject
+                message.attach(MIMEText(body, "plain"))
+
+                server.sendmail(sender_email, receiver_email, message.as_string())
+                print('Email sent successfully!')
+            else:
+                return Response({'error': 'Bunday email mavjud emas'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(f'Error: {e}')
+        return Response({'email': 'Sizning emailingizga xabar jo`natildi'})
+
+
+class VerifyLogin(APIView):
+    serializer_class = VerifyLoginSerializer
+    @swagger_auto_schema(request_body=VerifyLoginSerializer)
+    def post(self,request):
+        otp_login = request.data.get('otp_login')
+        filtr1 = MafiaUserModel.objects.all().filter(otp_login=otp_login)
+        serializer = MafiaModelSerializer(filtr1,many=True)
+        if filtr1:
+            return Response(serializer.data)
+        else:
+            return Response({'Xabar': "Parolni xato kiritdingingiz"})
+
+
 

@@ -25,3 +25,9 @@ class VerifySerializer(ModelSerializer):
     class Meta:
         model = MafiaUserModel
         fields = ['otp',]
+
+
+class VerifyLoginSerializer(ModelSerializer):
+    class Meta:
+        model = MafiaUserModel
+        fields = ['otp_login',]
