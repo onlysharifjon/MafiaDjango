@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+#ishladi
 
 from pathlib import Path
 
@@ -24,7 +25,7 @@ SECRET_KEY = 'django-insecure-^19of@e#)5&^y+&n3@i^ltw&+i@sqjmwx219y^2dh%+!f%xhc&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '*']
+ALLOWED_HOSTS = ['omonullo.uz']
 
 # Application definition
 
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Mafiausers',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [

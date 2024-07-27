@@ -8,7 +8,7 @@ import smtplib
 import random
 from .models import MafiaUserModel
 from .models import MafiaUserModel
-from .serializers import LoginSerializer
+from .serializers import *
 
 # login qilish uchun api yozishimiz kerak
 from rest_framework.views import APIView
