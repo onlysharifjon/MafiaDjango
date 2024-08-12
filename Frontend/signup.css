@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+    width: 100%;
+    overflow: hidden;
+}
+
+.ring {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ring i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+}
+
+.ring i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
+}
+
+.ring i:nth-child(2) {
+    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
+}
+
+.ring i:nth-child(3) {
+    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
+}
+
+.ring:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.signup {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.signup h2 {
+    font-size: 2em;
+    color: rgb(87, 70, 145);
+}
+
+.signup .inputBx {
+    position: relative;
+    width: 100%;
+}
+
+.signup .inputBx input {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+}
+
+.signup .inputBx .btn-send {
+    transition: transform 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+}
+
+.signup .inputBx .btn-send.button-moved {
+    transform: translateX(100px);
+}
+.signup .inputBx .btn-send button:hover{
+    box-shadow: 0px 5px 6px #735fd8;
+    transition: 1s;
+    cursor: pointer;
+}
+.signup .inputBx .btn-send button:active{
+    transform: scale(0.9);
+}
+.signup .inputBx .btn-send button {
+    position: absolute;
+    bottom: 5.5px;
+    right: 5px;
+    border-radius: 200px;
+    width: 90px;
+    height: 40px;
+    background: #0078ff;
+    background: linear-gradient(45deg, #735fd8, #482481);
+    border: none;
+    color: white;
+}
+
+.signup .inputBx .btn-send.button-moved button {
+    background: white;
+    color: #482481;
+    transition: 0.4s;
+}
+
+.signup .inputBx input[type="submit"] {
+    width: 100%;
+    background: #0078ff;
+    background: linear-gradient(45deg, #735fd8, #482481);
+    border: none;
+    cursor: pointer;
+}
+.signup .inputBx input[type="submit"]:hover{
+    box-shadow: 0px 5px 6px #735fd8;
+    transition: 0.4s;
+    background: white;
+    color: #482481;
+}
+.signup .inputBx input[type="submit"]:active{
+    transform: scale(0.9);
+}
+.signup .inputBx input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
