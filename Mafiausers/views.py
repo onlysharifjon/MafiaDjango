@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
-from .models import MafiaUserModel, RoomModel
+from .models import *
 from .serializers import *
 from drf_yasg.utils import swagger_auto_schema
 import hashlib
@@ -150,3 +150,65 @@ class JoinRoom(APIView):
         room.room_users.add(user)
 
         return Response({"Status": 'User Joined to clan'})
+
+
+def randomize(user_ids:list,user_count:int, rood_id):
+    if user_count>=4 and user_count<=7:
+        roles = ['don','doc'] + ['people']*(user_count-2)
+        random.shuffle(user_ids)
+        participants = []
+        
+        for i, user_id in enumerate(user_ids):
+            participant = PariticipantModel.objects.create(
+                user_id_id = user_id,
+                role = roles[i]
+            )
+            participants.append(participant)
+        
+        game = GameInformationModel.objects.create(room = rood_id)
+        game.participants.set(participants)
+        game.save()
+
+        serializer = GameInformationSerializer(game)
+        return serializer.data
+    
+
+
+
+
+class StartGame(APIView):
+    @swagger_auto_schema(request_body=StartGameSerializer)
+    def post(self, request):
+        room_id = request.data.get('room_id')
+        if not room_id:
+            return Response({"error": "Room ID is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            room = RoomModel.objects.get(room_id=room_id)
+        except RoomModel.DoesNotExist:
+            return Response({"error": "Room not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        user_count = room.room_users.count()
+        user_ids = list(room.room_users.values_list('id', flat=True))       
+        if user_count< 4:         
+            return Response({"status": "Game not started. Not enough players"}, status=status.HTTP_400_BAD_REQUEST)
+            
+        return Response({"status":"Game started!","game:info":randomize(user_ids,user_count,room)}, status=status.HTTP_200_OK)
+
+     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
