@@ -11,7 +11,7 @@ import hashlib
 import random
 from rest_framework.views import APIView
 from .serializers import RegisterSRL
-
+from rest_framework import generics
 
 class RegisterMafiaUser(APIView):
     serializer_class = RegisterSRL
@@ -195,7 +195,33 @@ class StartGame(APIView):
             
         return Response({"status":"Game started!","game:info":randomize(user_ids,user_count,room)}, status=status.HTTP_200_OK)
 
-     
+
+class SetDeadView(APIView):
+    @swagger_auto_schema(request_body=GameInformationSerializer)
+    def post(self, request):
+        game_id = request.data.get('game_id')
+        participant_id = request.data.get('participant_id')
+
+        try:
+            game = GameInformationModel.objects.get(id=game_id)
+        except GameInformationModel.DoesNotExist:
+            return Response({"status": "Game not found"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            participant = game.participants.get(user_id=participant_id)
+            participant.is_dead = True
+            participant.save()
+            
+            return Response({"status": "Participant updated successfully"}, status=status.HTTP_200_OK)
+        except PariticipantModel.DoesNotExist:
+            return Response({"status": "Participant not found"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"status": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class GameInformationView(generics.RetrieveAPIView):
+    queryset = GameInformationModel.objects.all()
+    serializer_class = GameInformationSerializer
+
         
         
         
