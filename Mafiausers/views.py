@@ -148,79 +148,87 @@ class JoinRoom(APIView):
         room = RoomModel.objects.get(room_id=room_id)
         user = MafiaUserModel.objects.get(id=user_id)
         room.room_users.add(user)
-
         return Response({"Status": 'User Joined to clan'})
 
 
-def randomize(user_ids:list,user_count:int, rood_id):
-    if user_count>=4 and user_count<=7:
-        roles = ['don','doc'] + ['people']*(user_count-2)
-        random.shuffle(user_ids)
-        participants = []
-        
-        for i, user_id in enumerate(user_ids):
-            participant = PariticipantModel.objects.create(
-                user_id_id = user_id,
-                role = roles[i]
-            )
-            participants.append(participant)
-        
-        game = GameInformationModel.objects.create(room = rood_id)
-        game.participants.set(participants)
-        game.save()
-
-        serializer = GameInformationSerializer(game)
-        return serializer.data
-    
-
-
-
-
-class StartGame(APIView):
-    @swagger_auto_schema(request_body=StartGameSerializer)
+class Boshlash(APIView):
+    @swagger_auto_schema(request_body=RoomStartSerializer)
     def post(self, request):
         room_id = request.data.get('room_id')
-        if not room_id:
-            return Response({"error": "Room ID is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            room = RoomModel.objects.get(room_id=room_id)
-        except RoomModel.DoesNotExist:
-            return Response({"error": "Room not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        user_count = room.room_users.count()
-        user_ids = list(room.room_users.values_list('id', flat=True))       
-        if user_count< 4:         
-            return Response({"status": "Game not started. Not enough players"}, status=status.HTTP_400_BAD_REQUEST)
+        print(RoomModel.objects.all().filter(room_id=room_id,is_started=True).exists())
+        if RoomModel.objects.all().filter(room_id=room_id,is_started=True).exists():
+            return Response({'Message': "Bu o`yin oldin boshlangan"})
+        users = RoomModel.objects.all().filter(room_id=room_id).first().room_users.all()
+        users_list = []
+        for i in users:
+            users_list.append(i.id)
             
-        return Response({"status":"Game started!","game:info":randomize(user_ids,user_count,room)}, status=status.HTTP_200_OK)
+        rollar = []
+        #minimal 5 ta odam bo`lishi kerak
+        #5-8 ta odam bo`lsa 2 mafia, 1 doctor, 1 policiya qolgani oddiy odam
+        #9-12 ta odam bo`lsa 3 mafia, 1 doctor, 1 policiya qolgani oddiy odam
+        #13-16 ta odam bo`lsa 4 mafia, 1 doctor, 1 policiya,1 manyak qolgani oddiy odam
+        #17-20 ta odam bo`lsa 5 mafia, 1 doctor, 1 policiya,1 manyak, 1 o`yinchi` qolgani oddiy odam
+        if len(users_list) >= 5 and len(users_list) <= 8:
+            rollar = ['Mafia',"Mafia","Doctor","Komissar"]
+            xalq = len(users_list)-len(rollar)
+            for i in range(xalq):
+                rollar.append("Oddiy aholi")
+        elif len(users_list) >= 9 and len(users_list) <= 12:
+            rollar = ['Mafia',"Mafia","Mafia","Doctor","Komissar"]
+            xalq = len(users_list)-len(rollar)
+            for i in range(xalq):
+                rollar.append("Oddiy aholi")
+        elif len(users_list) >= 13 and len(users_list) <= 16:
+            rollar = ['Mafia',"Mafia","Mafia","Mafia","Doctor","Komissar","Manyak"]
+            xalq = len(users_list)-len(rollar)
+            for i in range(xalq):
+                rollar.append("Oddiy aholi")
+        elif len(users_list) >= 17 and len(users_list) <= 25:
+            rollar = ["Oyinchi",'Mafia','Mafia',"Mafia","Mafia","Mafia","Doctor","Komissar","Manyak","Manyak"]
+            xalq = len(users_list)-len(rollar)
+            for i in range(xalq):
+                rollar.append("Oddiy aholi")
+        else:
+            return Response({'Message': "O`yinchilar soni 5 dan kam yoki 25 dan ortiq bo`lmasligi kerak"})
+        import random
+        random.shuffle(rollar)
+        users_dict = {
+        }
+        for i in range(len(users_list)):
+            users_dict[users_list[i]] = rollar[i]
+        for i in users_dict:
+            user = MafiaUserModel.objects.get(id=i)
+            room = RoomModel.objects.all().filter(room_id=room_id).first()
+            RoomRole.objects.create(room=room, user=user, role=users_dict[i])
+        RoomModel.objects.filter(room_id=room_id).update(is_started=True)
+        return Response(users_dict,status=200)
+    
+class ViewRole(APIView):
+    @swagger_auto_schema(request_body=RoleViewSerializer)
+    def post(self,request):
+        id_user = request.data.get('user_id')
+        room_id = request.data.get("room_id")
+        user = MafiaUserModel.objects.get(id=id_user)
+        room = RoomModel.objects.all().filter(room_id=room_id).first()
+        a = RoomRole.objects.filter(room=room,user=user).first()
+        
+        
+        return Response({"Message": f"{user.username} Sizning Rolingiz <<<{str(a)}>>>"})
 
 
-class SetDeadView(APIView):
-    @swagger_auto_schema(request_body=GameInformationSerializer)
-    def post(self, request):
-        game_id = request.data.get('game_id')
-        participant_id = request.data.get('participant_id')
 
-        try:
-            game = GameInformationModel.objects.get(id=game_id)
-        except GameInformationModel.DoesNotExist:
-            return Response({"status": "Game not found"}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            participant = game.participants.get(user_id=participant_id)
-            participant.is_dead = True
-            participant.save()
-            
-            return Response({"status": "Participant updated successfully"}, status=status.HTTP_200_OK)
-        except PariticipantModel.DoesNotExist:
-            return Response({"status": "Participant not found"}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            return Response({"status": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
-class GameInformationView(generics.RetrieveAPIView):
-    queryset = GameInformationModel.objects.all()
-    serializer_class = GameInformationSerializer
+        
+
+
+        
+        
+
+
+
 
         
         

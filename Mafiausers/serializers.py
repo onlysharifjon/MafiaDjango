@@ -45,17 +45,10 @@ class StartGameSerializer(ModelSerializer):
         model = RoomModel
         fields = '__all__'
 
-
-class ParticipantSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PariticipantModel
-        fields = ['user_id', 'role', 'is_dead']
+class RoomStartSerializer(Serializer):
+    room_id = serializers.CharField(max_length=255)
 
 
-class GameInformationSerializer(serializers.ModelSerializer):
-    participants = ParticipantSerializer(many=True)
-
-    class Meta:
-        model = GameInformationModel
-        fields = ['id', 'room', 'participants']
-
+class RoleViewSerializer(Serializer):
+    room_id = serializers.CharField(max_length=255)
+    user_id = serializers.IntegerField()

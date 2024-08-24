@@ -1,12 +1,6 @@
 from django.db import models
 
-CHOICES = [
-    ("don","Don"),
-    ("doc",'Doctor'),
-    ("kom","Komissar"),
-    ("people","Oddiy aholi"),
-    ("mafia","Mafia")
-]
+
 
 
 class  MafiaUserModel(models.Model):
@@ -22,27 +16,31 @@ class  MafiaUserModel(models.Model):
 
 
 class RoomModel(models.Model):
+    is_started = models.BooleanField(default=False)
     room_id = models.CharField(max_length=100, unique=True)
     room_users = models.ManyToManyField(MafiaUserModel)
 
     def __str__(self):
         return self.room_id
+CHOICES = [
+    ("Manyak","Manyak"),
+    ("Doctor",'Doctor'),
+    ("Komissar","Komissar"),
+    ("Oddiy aholi","Oddiy aholi"),
+    ("Mafia","Mafia"),
+    ("Oyinchi","Oyinchi")
+    
 
-
-class PariticipantModel(models.Model):
-    user_id = models.ForeignKey(MafiaUserModel, on_delete=models.CASCADE)
-    role = models.CharField(choices=CHOICES, max_length=25)
-    is_dead = models.BooleanField(default=False)
-
-    def __str__(self) -> str:
-        return str(self.user_id)
-
-
-class GameInformationModel(models.Model):
+]
+class RoomRole(models.Model):
     room = models.ForeignKey(RoomModel, on_delete=models.CASCADE)
-    participants = models.ManyToManyField(PariticipantModel)
+    user = models.ForeignKey(MafiaUserModel, on_delete=models.CASCADE)
+    role = models.CharField(max_length=22, choices=CHOICES)
+    is_died = models.BooleanField(default=False)
 
-    def __str__(self) -> str:
-        return str(self.id)
+    def __str__(self):
+        return self.role
+
+
 
 

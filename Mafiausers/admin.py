@@ -11,5 +11,4 @@ class MafiarModelAdmin(admin.ModelAdmin):
 
 admin.site.register(MafiaUserModel, MafiarModelAdmin)
 admin.site.register(RoomModel)
-admin.site.register(PariticipantModel)
-admin.site.register(GameInformationModel)
+admin.site.register(RoomRole,list_display=['room','user','role','is_died'])
