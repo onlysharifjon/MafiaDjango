@@ -9,5 +9,6 @@ urlpatterns = [
     path('v1/create/lobby/', CreateRoom.as_view()),
     path('v1/join/lobby/', JoinRoom.as_view()),
     path('v1/start/', Boshlash.as_view()),
-    path('v1/roleusers/',ViewRole.as_view())
+    path('v1/roleusers/',ViewRole.as_view()),
+    path('v1/room_all_role/',AllRoomRole.as_view())
 ]

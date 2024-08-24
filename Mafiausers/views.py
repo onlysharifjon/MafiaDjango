@@ -217,7 +217,32 @@ class ViewRole(APIView):
         return Response({"Message": f"{user.username} Sizning Rolingiz <<<{str(a)}>>>"})
 
 
+class AllRoomRole(APIView):
+    @swagger_auto_schema(request_body=RoomStartSerializer)
+    def post(self,request):
+        room_id = request.data.get("room_id")
+        room = RoomModel.objects.all().filter(room_id=room_id).first()
+        a = RoomRole.objects.filter(room=room)
+        mafialar = {
 
+        }
+        xalq = {
+
+        }
+        for i in a:
+            if i.role == "Mafia":
+                mafialar[i.user.username] = i.role
+            else:
+                xalq[i.user.username] = i.role
+        all_data = {
+            "Mafiyalar": mafialar,
+            "Xalq":xalq
+
+        }
+        
+        
+
+        return Response(all_data)
 
         
 
